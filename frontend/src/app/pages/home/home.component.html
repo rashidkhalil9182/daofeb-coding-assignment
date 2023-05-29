@@ -1,0 +1,59 @@
+<section fxLayout="column" fxFlexAlign="stretch" fxFlex="80%" fxFlex.lt-md="100%" style="margin:auto">
+  <div fxFlexAlign="center center">
+      <p>Parent Transactions</p>
+  </div>
+
+  <p fxFlexAlign="center">In here, you can see all parent transaction:</p>
+
+  <div >
+    <mat-card>
+        <mat-card-content>
+          <mat-table class="table" [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" [matSortDisableClear]="true">
+            <ng-container matColumnDef="id">
+              <div *matHeaderCellDef class="table-cell table-header">#</div>
+              <div *matCellDef="let element" class="table-cell">{{element._id}}</div>
+            </ng-container>
+            <ng-container matColumnDef="sender">
+              <div *matHeaderCellDef class="table-cell table-header">Sender</div>
+              <div class="cell" *matCellDef="let element" class="table-cell">{{element.sender}}</div>
+            </ng-container>
+            <ng-container matColumnDef="receiver">
+              <div *matHeaderCellDef class="table-cell table-header">Receiver</div>
+              <div class="cell" *matCellDef="let element" class="table-cell">{{element.receiver}}</div>
+            </ng-container>
+            <ng-container matColumnDef="totalAmount">
+              <div *matHeaderCellDef class="table-cell table-header">Total Amount</div>
+              <div class="cell" *matCellDef="let element" class="table-cell">{{element.totalAmount}}</div>
+            </ng-container>
+            <ng-container matColumnDef="totalPaidAmount">
+              <div *matHeaderCellDef class="table-cell table-header">Total Paid Amount</div>
+              <div class="cell" *matCellDef="let element" class="table-cell">{{element.totalPaidAmount}}</div>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+            <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"></mat-row>
+          </mat-table>
+
+          <mat-paginator [length]="length" [pageSize]="2" (page)="onPaginateChange($event)"    showFirstLastButtons aria-label="Select Page"></mat-paginator>
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Open Advanced Settings
+                </mat-panel-title>
+                <mat-panel-description>
+                  Sort Order
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-radio-group [(ngModel)]="direction" (ngModelChange)="ngModelChange($event)">
+                <mat-radio-button value="asc"  >Ascending</mat-radio-button>
+                <mat-radio-button value="desc"  >Descending</mat-radio-button>
+              </mat-radio-group>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+    </mat-card>
+  </div>
+
+</section>
