@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
   public panelOpenState = false;
   // The initial direction for sorting the parent IDs is set to ascending.
   public direction = Direction.ASCENDING;
+  
   constructor(
     private parentService: ParentsService,
     private childService: ChildService,
