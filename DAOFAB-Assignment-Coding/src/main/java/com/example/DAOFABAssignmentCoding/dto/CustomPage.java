@@ -2,17 +2,18 @@ package com.example.DAOFABAssignmentCoding.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-@Data
-@AllArgsConstructor
-public class CustomPage {
+public class CustomPage<T>  {
 
-    Long totalElements;
+  public    int totalElements;
+    public  List<T> pageList = new ArrayList<T>();
+    public int pageCount;
 
-    int totalPages;
+    public  int nrOfElements;
 
-    int number;
-
-    int size;
+    public int size;
 }
 
