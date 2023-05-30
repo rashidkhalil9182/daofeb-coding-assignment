@@ -5,5 +5,5 @@ export const environment = {
   appVersion: '1.0.1',
   appTitle: 'DaoFAB',
   serverUrl: serverUrl,
-  apiUrl: serverUrl + 'api/'
+  apiUrl: serverUrl 
 }
