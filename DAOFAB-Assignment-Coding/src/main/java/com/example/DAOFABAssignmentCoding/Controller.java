@@ -1,6 +1,7 @@
 
 package com.example.DAOFABAssignmentCoding;
 import com.example.DAOFABAssignmentCoding.dto.Child;
+import com.example.DAOFABAssignmentCoding.dto.CustomPage;
 import com.example.DAOFABAssignmentCoding.dto.Parent;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -33,7 +34,7 @@ public class Controller {
      * @throws IOException if there is an I/O error reading the JSON file
      */
     @GetMapping("/parents")
-    public PagedListHolder getParentTransactions(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "asc") String sortOrder) throws IOException {
+    public CustomPage getParentTransactions(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "asc") String sortOrder) throws IOException {
         // Set the page size and offset
         int pageSize = 2;
         int offset = (page - 1) * pageSize;
@@ -50,34 +51,26 @@ public class Controller {
         for (Parent p : parents) {
             p.setChild(getChildTransactions(p.getId()));
         }
-//        // If the offset is greater than or equal to the size of the list, return an empty list
-//        if (offset >= parents.size()) {
-////            return Collections.emptyList();
-//        }
-//
 //        // Sort the list based on parent id
         Comparator<Parent> parentIdComparator = Comparator.comparing(Parent::getId);
         if (sortOrder.equals("desc")) {
             parentIdComparator = parentIdComparator.reversed();
         }
         parents.sort(parentIdComparator);
-//
-//        // Get the sublist of Parent objects based on the offset and page size
-//        int endIndex = Math.min(offset + pageSize, parents.size());
-//        List<Parent> lists = parents.subList(offset, endIndex);
-//        for (Parent p : lists) {
-//            p.setChild(getChildTransactions(p.getId()));
-//        }
 
-        System.out.println(sortOrder);
+
         PagedListHolder pageT = new PagedListHolder(parents);
-        pageT.setPageSize(pageSize); // number of items per page
-        pageT.setPage(page - 1);
-//        MutableSortDefinition x = new MutableSortDefinition ("id", true, sortOrder.equals("desc") ? false :true);
-//        pageT.setSort(x);
+        pageT.setPageSize(2); // number of items per page
+        pageT.setPage(page-1);
+        CustomPage<Parent> stack = new CustomPage<>();
+        stack.pageList = pageT.getPageList();
+        stack.nrOfElements = pageT.getNrOfElements();
+        stack.pageCount = pageT.getPageCount();
+        stack.totalElements = pageT.getNrOfElements();
+
 //        pageT.resort();
 //        return pageT
-        return  pageT;
+        return  stack;
     }
 
 
