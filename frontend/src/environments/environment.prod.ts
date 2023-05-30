@@ -1,4 +1,4 @@
-const serverUrl = '';
+const serverUrl = 'https://daofeb-coding-assignment-production.up.railway.app/';
 
 export const environment = {
   production: false,
