@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200", "https://coding-task-front-end.vercel.app/"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://rashidkhalil9182.github.io/daofeb-coding-assignment/"})
 public class Controller {
     private final ObjectMapper mapper = new ObjectMapper();
 
